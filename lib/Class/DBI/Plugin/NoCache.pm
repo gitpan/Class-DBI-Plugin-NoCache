@@ -1,7 +1,7 @@
 package Class::DBI::Plugin::NoCache;
 use strict;
 use vars qw/$VERSION/;
-$VERSION = 0.02;
+$VERSION = 0.03;
 sub import {
     my $class = shift;
     my $pkg   = caller(0);
@@ -14,7 +14,7 @@ sub import {
     my $super = $pkg->can('_init');
     *{$pkg."::_init"} = sub {
         my $caller = shift;
-        local $Class::DBI::Weaken_is_Available = not $caller->nocache;
+        local $Class::DBI::Weaken_Is_Available = not $caller->nocache;
         return $super->($caller, @_);
     };
 }
